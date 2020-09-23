@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import { filterImageFromURL, deleteLocalFiles } from "./util/util";
 
@@ -14,13 +14,13 @@ import { filterImageFromURL, deleteLocalFiles } from "./util/util";
 
   // Root Endpoint
   // Displays a simple message to the user
-  app.get("/", async (req, res) => {
+  app.get("/", async (req: Request, res: Response) => {
     res.send("try GET /filteredimage?image_url={{}}");
   });
 
   // Filter an image from a public url
-  app.get("/filteredimage?:image_url", async (req, res) => {
-    const imageUrl = req.query.image_url;
+  app.get("/filteredimage?:image_url", async (req: Request, res: Response) => {
+    const imageUrl: string = req.query.image_url;
 
     if (!imageUrl) {
       return res.status(400).send({ message: "Image is required" });
